@@ -1,18 +1,17 @@
-.body {
-    text-align: center;
-}
-
 .cell {
-    height: 30px;
-    width: 30px;
+    height: 40px;
+    width: 40px;
     border: 0.00001px solid rgb(0, 0, 0);
     border-style: inset;
 }
 
 .blackcell {
-    background-color: black;
+    background-color: rgb(81, 73, 73);
 }
 
 .whitecell {
     background-color: white;
+}
+.chosencell {
+    background-color: rgb(199, 227, 100);
 }
