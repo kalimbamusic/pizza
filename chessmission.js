@@ -14,6 +14,6 @@ for (i = 0; i < 8; i++) {
         }
     }
     // tr.addEventListener('click',td.setAttribute('class','chosencell'))
-    // ChessTable.appendChild(tr);
+    ChessTable.appendChild(tr);
 }
 document.body.appendChild(ChessTable);
