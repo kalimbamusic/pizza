@@ -1,3 +1,5 @@
+
+
 let ChessTable = document.createElement('table');
 for (i = 0; i < 8; i++) {
     let tr = document.createElement('tr');
@@ -13,8 +15,9 @@ for (i = 0; i < 8; i++) {
             tr.appendChild(td);
             
         }
-        // td.addEventListener('click',event.currentTarget)
+        td.addEventListener('click',console.log(5))
     }
     ChessTable.appendChild(tr);
 }
+ChessTable.addEventListener('click',console.log())
 document.body.appendChild(ChessTable);
