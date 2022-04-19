@@ -11,9 +11,10 @@ for (i = 0; i < 8; i++) {
         else {
             td.setAttribute('class', 'cell blackcell');
             tr.appendChild(td);
+            
         }
+        // td.addEventListener('click',event.currentTarget)
     }
-    // tr.addEventListener('click',td.setAttribute('class','chosencell'))
     ChessTable.appendChild(tr);
 }
 document.body.appendChild(ChessTable);
