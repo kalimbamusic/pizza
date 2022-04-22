@@ -5,26 +5,26 @@ let stringofid = (Array.from(position))
 arrayrow = stringofid[0]
 arraycolumn = stringofid[2]
 console.log(arrayrow, arraycolumn)
-console.log(eval(arrayrow + 1))
-console.log(document.getElementById('5 7'))
+console.log(eval(arrayrow[0]) + 1)
+// console.log(document.getElementById('5 7'))
 
 
 }
 
 
 }
-
-
+let preChosenCell = undefined;
 function onclick(td){
-    if ((document.querySelector('.chosencell')!== undefined)) {
-        (document.querySelector('.chosencell').remove)
-
+    preChosenCell = document.querySelector(".chosencell")
+    if ((preChosenCell!== undefined && preChosenCell!== null)) {
+        (preChosenCell.classList.remove('chosencell'))
     }  
-   td.currentTarget.setAttribute('class','cell chosencell')
+   td.currentTarget.classList.add("chosencell")
+   preChosenCell = td
    let piecetype = td.currentTarget.innerHTML
    let position = (td.currentTarget.id)
-   console.log(td.currentTarget.id)
-   console.log(td.currentTarget.innerHTML)
+//    console.log(td.currentTarget.id)
+//    console.log(td.currentTarget.innerHTML)
    possiblemoves(piecetype,position)
 
 }
