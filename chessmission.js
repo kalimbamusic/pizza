@@ -1,8 +1,32 @@
+function possiblemoves(piecetype,position){
+if (piecetype === '<img src="chess/images/dark/pawn.png">') {
+console.log(position)
+let stringofid = (Array.from(position))
+arrayrow = stringofid[0]
+arraycolumn = stringofid[2]
+console.log(arrayrow, arraycolumn)
+console.log(eval(arrayrow + 1))
+console.log(document.getElementById('5 7'))
+
+
+}
+
+
+}
+
+
 function onclick(td){
-    // if ((document.getElementsByClassName('chonsecell')) !== undefined) {
-    //     (document.getElementsByClassName('chonsecell').setAttribute('class', 'blackcell'))
-    // }
-   td.setAttribute('class','cell chosencell')
+    if ((document.querySelector('.chosencell')!== undefined)) {
+        (document.querySelector('.chosencell').remove)
+
+    }  
+   td.currentTarget.setAttribute('class','cell chosencell')
+   let piecetype = td.currentTarget.innerHTML
+   let position = (td.currentTarget.id)
+   console.log(td.currentTarget.id)
+   console.log(td.currentTarget.innerHTML)
+   possiblemoves(piecetype,position)
+
 }
 function putimageonboard(td,color,type){
     const image = document.createElement('img')
@@ -25,9 +49,10 @@ function makechessboard() {
             else {
                 td.setAttribute('class', 'cell blackcell');
                 tr.appendChild(td);
-
+                
             }
-            td.addEventListener('click',(onclick(td)));
+            
+            td.addEventListener('click', onclick);
             // td.addEventListener('click', ()=> (td.setAttribute('class', 'cell chosencell')))
         }
         ChessTable.appendChild(tr);
@@ -52,12 +77,22 @@ function intialboard() {
     putimageonboard((document.getElementById('7 5')), 'dark', 'knight');
     putimageonboard((document.getElementById('7 4')), 'dark', 'king');
     putimageonboard((document.getElementById('7 3')), 'dark', 'queen');
-    // putimageonboard((document.getElementById('1').innerHTML), 'white', 'pawn');
-    
+    for (let i = 0; i < 8; i++) {
+        putimageonboard((document.getElementById('6 ' + i)), 'dark', 'pawn');
+        ;
+    }  
+     
 }
 
 makechessboard();
 
 intialboard();
 
-console.log(document.getElementById('1'))
+// console.log(document.getElementById('0 2'))
+// console.log(document.getElementsByClassName('chosencell').length)
+// console.log(document.getElementById(0).getElementsByClassName('cell'))
+// console.log(document.images.item(0).outerHTML)
+// console.log(document.getElementById('0 2').innerHTML)
+//todo: turn the td.id to a string so you could change it
+// ((document.getElementsByClassName('chonsecell').array.forEach(element => {
+// })) !== undefined)
