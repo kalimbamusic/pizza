@@ -1,26 +1,30 @@
 function possiblemoves(piecetype,position){
-if (piecetype === '<img src="chess/images/dark/pawn.png">') {
-console.log(position)
-let stringofid = (Array.from(position))
-arrayrow = stringofid[0]
-arraycolumn = stringofid[2]
-console.log(arrayrow, arraycolumn)
-console.log(eval(arrayrow[0]) + 1)
-// console.log(document.getElementById('5 7'))
-
+    i = document.querySelector(".maybecell")
+    if ((i !== null )) {
+        (i.classList.remove('maybecell'))
+    }
+    let stringofid = (Array.from(position))
+    arrayrow = stringofid[0]
+    arraycolumn = stringofid[2]
+    if (piecetype === '<img src="chess/images/dark/pawn.png">') {
+        (arrayrow --)
+        console.log(position[0]--)
+        console.log((String(arrayrow))+' ' + arraycolumn)
+        console.log((arrayrow + 1))
+        possiblemovesid = document.getElementById((String(arrayrow))+' ' + arraycolumn)
+        console.log(possiblemovesid)
+        possiblemovesid.classList.add('maybecell')
 
 }
 
 
 }
-let preChosenCell = undefined;
 function onclick(td){
-    preChosenCell = document.querySelector(".chosencell")
-    if ((preChosenCell!== undefined && preChosenCell!== null)) {
-        (preChosenCell.classList.remove('chosencell'))
+    i = document.querySelector(".chosencell")
+    if ((i !== null )) {
+        (i.classList.remove('chosencell'))
     }  
    td.currentTarget.classList.add("chosencell")
-   preChosenCell = td
    let piecetype = td.currentTarget.innerHTML
    let position = (td.currentTarget.id)
 //    console.log(td.currentTarget.id)
@@ -96,3 +100,4 @@ intialboard();
 //todo: turn the td.id to a string so you could change it
 // ((document.getElementsByClassName('chonsecell').array.forEach(element => {
 // })) !== undefined)
+// console.log(document.getElementById('5 7'))
