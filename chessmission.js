@@ -3,19 +3,33 @@ function possiblemoves(piecetype,position){
     if ((i !== null )) {
         (i.classList.remove('maybecell'))
     }
-    let stringofid = (Array.from(position))
-    arrayrow = stringofid[0]
-    arraycolumn = stringofid[2]
-    if (piecetype === '<img src="chess/images/dark/pawn.png">') {
-        (arrayrow --)
-        console.log(position[0]--)
-        console.log((String(arrayrow))+' ' + arraycolumn)
-        console.log((arrayrow + 1))
-        possiblemovesid = document.getElementById((String(arrayrow))+' ' + arraycolumn)
-        console.log(possiblemovesid)
-        possiblemovesid.classList.add('maybecell')
+    positionrow = position[0]
+    positioncolumn = position[2]
 
+
+    if (piecetype === '<img src="chess/images/dark/pawn.png">') {
+        elementById((positionrow -1),(positioncolumn))
+         
+    }
+        if (piecetype === '<img src="chess/images/dark/rook.png">' ) {
+            for (positionrow = 0; positionrow < 8; positionrow++) {
+            elementById((positionrow),(positioncolumn))}
+            for (let positioncolumn = 0; positioncolumn < 8; positioncolumn++) {
+                positionrow = position[0]
+                elementById((positionrow),(positioncolumn))
+        }
+
+    }
+   
+        // }
+function elementById(positionrow,positioncolumn) {
+    let maybecell = document.getElementById((String(positionrow)+ ' '+String(positioncolumn)))
+    // if (positionrow == position[0] && positioncolumn == position[2]){
+    //     maybecell.classList.add('chosencell')
+    // }
+    maybecell.classList.add('maybecell')
 }
+    
 
 
 }
@@ -27,8 +41,8 @@ function onclick(td){
    td.currentTarget.classList.add("chosencell")
    let piecetype = td.currentTarget.innerHTML
    let position = (td.currentTarget.id)
-//    console.log(td.currentTarget.id)
 //    console.log(td.currentTarget.innerHTML)
+//    console.log(td.currentTarget.id)
    possiblemoves(piecetype,position)
 
 }
@@ -83,9 +97,10 @@ function intialboard() {
     putimageonboard((document.getElementById('7 3')), 'dark', 'queen');
     for (let i = 0; i < 8; i++) {
         putimageonboard((document.getElementById('6 ' + i)), 'dark', 'pawn');
-        ;
+    }
+        for (let i = 0; i < 8; i++) {
+        putimageonboard((document.getElementById('1 ' + i)), 'white', 'pawn');    
     }  
-     
 }
 
 makechessboard();
@@ -98,6 +113,13 @@ intialboard();
 // console.log(document.images.item(0).outerHTML)
 // console.log(document.getElementById('0 2').innerHTML)
 //todo: turn the td.id to a string so you could change it
-// ((document.getElementsByClassName('chonsecell').array.forEach(element => {
+// ((document.getElementsByClassName('chonsecell').position.forEach(element => {
 // })) !== undefined)
 // console.log(document.getElementById('5 7'))
+
+// maybecell = document.getElementById(String(positionrow)+' ' + positioncolumn)
+// var maybecellslist = []
+// maybecellslist.push(maybecell)
+// console.log(maybecellslist)
+// maybecellslist[0].classList.add('maybecell')
+// let maybecell = document.getElementById(String(positionrow)+' ' + positioncolumn)
