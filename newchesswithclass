@@ -1,21 +1,68 @@
+const WHITE_PLAYER = 'white';
+const BLACK_PLAYER = 'black';
+const PAWN = 'pawn';
+const ROOK = 'rook';
+const KNIGHT = 'knight';
+const BISHOP = 'bishop';
+const KING = 'king';
+const QUEEN = 'queen';
+
+class Piece {
+  constructor(row, col, type, player) {
+    this.row = row;
+    this.col = col;
+    this.type = type;
+    this.player = player;
+  
+  }
+
+}
+class boardata{
+  constructor(pieces){
+  this.pieces = pieces;
+}
+}
+function startpieces(){
+  let result = [];
+  for(let i = 0; i< 8; i++){
+  result.push(new Piece(1,i,PAWN,WHITE_PLAYER))
+  }
+  for(let i = 0; i< 8; i++){
+    result.push(new Piece(6,i,PAWN,WHITE_PLAYER))
+    }
+  result.push(new Piece(0, 0, ROOK, WHITE_PLAYER));
+  result.push(new Piece(0, 1, KNIGHT, WHITE_PLAYER));
+  result.push(new Piece(0, 2, BISHOP, WHITE_PLAYER));
+  result.push(new Piece(0, 3, KING, WHITE_PLAYER));
+  result.push(new Piece(0, 4, QUEEN, WHITE_PLAYER));
+  result.push(new Piece(0, 5, BISHOP, WHITE_PLAYER));
+  result.push(new Piece(0, 6, KNIGHT, WHITE_PLAYER));
+  result.push(new Piece(0, 7, ROOK, WHITE_PLAYER));
+  result.push(new Piece(7, 0, ROOK, WHITE_PLAYER));
+  result.push(new Piece(7, 1, KNIGHT, WHITE_PLAYER));
+  result.push(new Piece(7, 2, BISHOP, BLACK_PLAYER));
+  result.push(new Piece(7, 3, KING, BLACK_PLAYER));
+  result.push(new Piece(7, 4, QUEEN, BLACK_PLAYER));
+  result.push(new Piece(7, 5, BISHOP, BLACK_PLAYER));
+  result.push(new Piece(7, 6, KNIGHT, BLACK_PLAYER));
+  result.push(new Piece(7, 7, ROOK, BLACK_PLAYER));
+  return result;
+}
+
+
+
 
 
 function possiblemoves(piecetype, position) {
-  document.querySelectorAll(".maybecell").forEach((td) => {
-    td.classList.remove('maybecell')
+  document.querySelectorAll(".maybecell").forEach((cell) => {
+    cell.classList.remove('maybecell')
     })
   
   positionrow = position[0];
   positioncolumn = position[2];
-  const directions = [[parseInt(positionrow)],[(positioncolumn-1)],[positionrow, positioncolumn+1] ,[positionrow -1,positioncolumn],[positionrow -1,positioncolumn+1],[positionrow -1,positioncolumn-1],[positionrow +1,positioncolumn],[positionrow +1,positioncolumn+1],[positionrow +1,positioncolumn-1]]
-    for (let i = 0; i < directions.length; i++) {
-      // elementById((directions.concat),(directions[i+1]));
-      console.log((directions[i].concat));
-      
-    }
+
   if (piecetype === '<img src="chess/images/dark/pawn.png">') {
     elementById(positionrow - 1, positioncolumn);
-    console.log(positionrow - 1, positioncolumn)
   }
   if (
     piecetype === '<img src="chess/images/dark/rook.png">' ||
@@ -34,71 +81,71 @@ function possiblemoves(piecetype, position) {
     piecetype === '<img src="chess/images/white/bishop.png">'
     ) {
     for (positionrow = 0; positionrow < 8; positionrow++) {
-      elementById(positionrow, positionrow)
-      console.log(positionrow, positionrow) 
+      elementById(positionrow, positioncolumn)
+      console.log(positionrow, positioncolumn) 
       }
       for (let positioncolumn = 0; positioncolumn < 8; positioncolumn++) {
-        positionrow = positioncolumn;
-        elementById(positioncolumn, positioncolumn);
+        // positionrow = position[0];
+        elementById(positionrow, positioncolumn);
       }
     
   }
   function elementById(positionrow, positioncolumn) {
     let maybecell = document.getElementById(String(positionrow) + " " + String(positioncolumn));
-    if(maybecell !== null){
     maybecell.classList.add("maybecell")
     if (maybecell.id === position){
       maybecell.classList.remove('maybecell')
     }
-    if(maybecell.innerHTML !== ''){
-      maybecell.classList.remove('maybecell')
-      console.log(maybecell.innerHTML)
-    }
     
   }
 }
-}
-function onclick(td) {
+function onclick(cell) {
   i = document.querySelector(".chosencell");
   if (i !== null) {
     i.classList.remove("chosencell");
   }
-  td.currentTarget.classList.add("chosencell");
-  let piecetype = td.currentTarget.innerHTML;
-  let position = td.currentTarget.id;
-  //    console.log(td.currentTarget.innerHTML)
-  //    console.log(td.currentTarget.id)
+  cell.currentTarget.classList.add("chosencell");
+  let piecetype = cell.currentTarget.innerHTML;
+  let position = cell.currentTarget.id;
+  //    console.log(cell.currentTarget.innerHTML)
+  //    console.log(cell.currentTarget.id)
   possiblemoves(piecetype, position);
 }
-function putimageonboard(td, color, type) {
+function putimageonboard(cell, color, type) {
   const image = document.createElement("img");
   image.src = "chess/images/" + color + "/" + type + ".png";
-  td.appendChild(image);
+  cell.appendChild(image);
 }
 
 function makechessboard() {
   let ChessTable = document.createElement("table");
   for (i = 0; i < 8; i++) {
-    let tr = document.createElement("tr");
+    let tr = ChessTable.insertRow();
     for (j = 0; j < 8; j++) {
-      let td = document.createElement("td");
+      const cell = tr.insertCell();
       tr.id = i.toString();
-      td.id = i.toString() + " " + j.toString();
+      cell.id = i.toString() + " " + j.toString();
       if ((i + j) % 2 == 0) {
-        td.setAttribute("class", "cell whitecell");
-        tr.appendChild(td);
+       cell.classList.add('cell')
+       cell.classList.add('whitecell')
+
+        // cell.setAttribute("class", "cell whitecell");
+        // tr.appendChild(cell);
       } else {
-        td.setAttribute("class", "cell blackcell");
-        tr.appendChild(td);
+       cell.classList.add('cell')
+       cell.classList.add('blackcell')
       }
 
-      td.addEventListener("click", onclick);
-      // td.addEventListener('click', ()=> (td.setAttribute('class', 'cell chosencell')))
+      cell.addEventListener("click", onclick);
+      // cell.addEventListener('click', ()=> (cell.setAttribute('class', 'cell chosencell')))
     }
     ChessTable.appendChild(tr);
   }
   document.body.appendChild(ChessTable);
+  let array = startpieces();
+  
 }
+
 function intialboard() {
   putimageonboard(document.getElementById("0 0"), "white", "rook");
   putimageonboard(document.getElementById("0 7"), "white", "rook");
@@ -125,15 +172,14 @@ function intialboard() {
 }
 
 makechessboard();
-
-intialboard();
-
+startpieces();
+// intialboard();
 // console.log(document.getElementById('0 2'))
 // console.log(document.getElementsByClassName('chosencell').length)
 // console.log(document.getElementById(0).getElementsByClassName('cell'))
 // console.log(document.images.item(0).outerHTML)
 // console.log(document.getElementById('0 2').innerHTML)
-//todo: turn the td.id to a string so you could change it
+//todo: turn the cell.id to a string so you could change it
 // ((document.getElementsByClassName('chonsecell').position.forEach(element => {
 // })) !== undefined)
 // console.log(document.getElementById('5 7'))
