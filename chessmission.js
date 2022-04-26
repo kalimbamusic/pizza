@@ -5,28 +5,43 @@ function possiblemoves(piecetype, position) {
     td.classList.remove('maybecell')
     })
   
-  positionrow = position[0];
-  positioncolumn = position[2];
-  const directions = [[parseInt(positionrow)],[(positioncolumn-1)],[positionrow, positioncolumn+1] ,[positionrow -1,positioncolumn],[positionrow -1,positioncolumn+1],[positionrow -1,positioncolumn-1],[positionrow +1,positioncolumn],[positionrow +1,positioncolumn+1],[positionrow +1,positioncolumn-1]]
-    for (let i = 0; i < directions.length; i++) {
-      // elementById((directions.concat),(directions[i+1]));
-      console.log((directions[i].concat));
-      
+  positionrow = parseInt(position[0]);
+  positioncolumn = parseInt(position[2]);
+  // const kingmoves = [[0,1],[0,-1] ,[-1,0],[-1,-1],[-1,1],[1,0],[1,1],[1,-1]]
+  const directions = [];
+
+  for (let i = -1; i < 2; i++) {
+      for (let j = -1; j < 2; j++) {
+        directions.push([positionrow + i,positioncolumn+j]) 
+        console.log(directions[0][0])   
+      }
     }
+    for (let i = 0; i < directions.length; i+=2) {
+      for (let j = 0; j < 8; j++) { 
+      elementById(directions[i][j], directions[i][j])
+      console.log(directions[i][0], directions[i][1])
+      elementById(directions[i][0], directions[i][1])
+    }
+
+    }
+
+
+
   if (piecetype === '<img src="chess/images/dark/pawn.png">') {
     elementById(positionrow - 1, positioncolumn);
-    console.log(positionrow - 1, positioncolumn)
   }
   if (
     piecetype === '<img src="chess/images/dark/rook.png">' ||
     piecetype === '<img src="chess/images/white/rook.png">'
   ) {
-    for (positionrow = 0; positionrow < 8; positionrow++) {
-      elementById(positionrow, positioncolumn);
+    for (i = 0; i < directions.array; i+=2) {
+      for (let j = 0; j < 8; j++) {
+        elementById(directions[i][j], directions[i][1]);
+      }
     }
-    for (let positioncolumn = 0; positioncolumn < 8; positioncolumn++) {
+    for (let j = 0; j < 8; j++) {
       positionrow = position[0];
-      elementById(positionrow, positioncolumn);
+      elementById(positionrow, j);
     }}
     
   if (
@@ -52,7 +67,7 @@ function possiblemoves(piecetype, position) {
     }
     if(maybecell.innerHTML !== ''){
       maybecell.classList.remove('maybecell')
-      console.log(maybecell.innerHTML)
+      
     }
     
   }
@@ -117,10 +132,10 @@ function intialboard() {
   putimageonboard(document.getElementById("7 4"), "dark", "king");
   putimageonboard(document.getElementById("7 3"), "dark", "queen");
   for (let i = 0; i < 8; i++) {
-    putimageonboard(document.getElementById("6 " + i), "dark", "pawn");
-  }
-  for (let i = 0; i < 8; i++) {
-    putimageonboard(document.getElementById("1 " + i), "white", "pawn");
+  //   putimageonboard(document.getElementById("6 " + i), "dark", "pawn");
+  // }
+  // for (let i = 0; i < 8; i++) {
+  //   putimageonboard(document.getElementById("1 " + i), "white", "pawn");
   }
 }
 
