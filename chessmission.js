@@ -1,55 +1,56 @@
-
-
-
-
-
-
 function possiblemoves(piecetype, position) {
-  document.querySelectorAll(".maybecell").forEach((td) => {
-    td.classList.remove('maybecell')})
- 
-
   let x = parseInt(position[0]);
   let y = parseInt(position[2]);
-  
-  
-  // if (piecetype === '<img src="chess/images/dark/king.png">'||
-  // piecetype === '<img src="chess/images/white/king.png">') {
-  // // for (let i = 0; i < directions.length; i++) {
-  // // elementById(directions[i][0], directions[i][1]);}}
-  
-  
-  
-  
-  
-  // if (piecetype === '<img src="chess/images/dark/bishop.png">'||
-  // piecetype === '<img src="chess/images/white/bishop.png">') {
-  // returnbishopmoves(x,y)
-  //   for (let i = 0; i < directions.length; i+2) {
-  //   elementById(directions[i][0], directions[i][1]);
-  //   console.log(x,y)
-  //    x++,y++}}
-  
-  
-     function returnmoves(x,y){
-      for (let index = 0; index < 9; index++) {
-        for (let j = 1; j < 9; j++) {
-          let directions = [[x,y+j],[x,y-j],[x-j,y],[x+j,y],[x-j,y-j],[x+j,y+j],[x+j,y-j],[x-j,y+j]];
+  if (piecetype === '<img src="chess/images/dark/queen.png">' || piecetype === '<img src="chess/images/white/queen.png">'){
+    for (let index = 0; index < 8; index++) {
+      for (let j = 1; j < 8; j++) {
+        let directions = [[x,y+j],[x,y-j],[x-j,y],[x+j,y],[x-j,y-j],[x+j,y+j],[x+j,y-j],[x-j,y+j]];
         let row = directions[index][0];
         let col = directions[index][1];
         if (row <8 && row> -1 && col<8 && col> -1) {
-          elementById(row,col)
-        }
-        }
-        
-      }
-    }
-    returnmoves(4,5)
+        elementById(row,col)
+  }}}}
+  if (piecetype === '<img src="chess/images/dark/king.png">' || piecetype === '<img src="chess/images/white/king.png">'){
+    for (let index = 0; index < 8; index++) {
+      for (let j = 1; j < 2; j++) {
+        let directions = [[x,y+j],[x,y-j],[x-j,y],[x+j,y],[x-j,y-j],[x+j,y+j],[x+j,y-j],[x-j,y+j]];
+        let row = directions[index][0];
+        let col = directions[index][1];
+        if (row <8 && row> -1 && col<8 && col> -1) {
+        elementById(row,col)
+        }}}}
+        if (piecetype === '<img src="chess/images/dark/bishop.png">' || piecetype === '<img src="chess/images/white/bishop.png">'){
+          for (let index = 0; index < 5; index++) {
+            for (let j = 1; j < 8; j++) {
+              let directions = [[x-j,y-j],[x+j,y+j],[x-j,y+j],[x+j,y-j],[x,y+j],[x,y-j],[x-j,y],[x+j,y]];
+              let row = directions[index][0];
+              let col = directions[index][1];
+              if (row <8 && row> -1 && col<8 && col> -1) {
+              elementById(row,col)
+              }}}}
+              if (piecetype === '<img src="chess/images/dark/rook.png">' || piecetype === '<img src="chess/images/white/rook.png">'){
+                for (let index = 4; index < 8; index++) {
+                  for (let j = 1; j < 8; j++) {
+                    let directions = [[x-j,y-j],[x+j,y+j],[x-j,y+j],[x+j,y-j],[x,y+j],[x,y-j],[x-j,y],[x+j,y]];
+                    let row = directions[index][0];
+                    let col = directions[index][1];
+                    if (row <8 && row> -1 && col<8 && col> -1) {
+                    elementById(row,col)
+                    }}}}
+                    if (piecetype === '<img src="chess/images/dark/knight.png">' || piecetype === '<img src="chess/images/white/knight.png">'){
+                      for (let index = 0; index < 8; index++) {
+                        for (let j = 0; j < 8; j++) {
+                          let directions = [[x-j,y-j],[x+j,y+j],[x-j,y+j],[x+j,y-j],[x,y+j],[x,y-j],[x-j,y],[x+j,y]];
+                          let row = directions[index][0];
+                          let col = directions[index][1];
+                          if (row <8 && row> -1 && col<8 && col> -1) {
+                          elementById(row,col)
+                          }}}}
 
-  
-  
-  
-  
+        
+      
+      
+    
 function elementById(x, y) {
     let maybecell = document.getElementById(String(x) + " " + String(y));
     
@@ -62,8 +63,6 @@ function elementById(x, y) {
       if(maybecell.classList.contains('maybecell')){
         cells.push(maybecell)
       }
-      // maybecell.addEventListener('click',() => onsecondclick((piecetype,position,cells)))
-
   }
 }
 }
@@ -84,12 +83,12 @@ function onclick(e) {
     if (i !== null) {
       i.classList.remove("chosencell");
     }
+  }
     
     e.currentTarget.classList.add("chosencell");
     let piecetype = e.currentTarget.innerHTML;
     let position = e.currentTarget.id;
     possiblemoves(piecetype, position);
-  }
   
 }
 
@@ -102,7 +101,6 @@ function makechessboard() {
     for (j = 0; j < 8; j++) {
       let td = document.createElement("td");
       tr.appendChild(td);
-      // tr.id = i.toString();//maybe use later
       td.id = i.toString() + " " + j.toString();
       if ((i + j) % 2 == 0) {
         td.className= 'cell whitecell';
@@ -116,18 +114,18 @@ function makechessboard() {
 function intialboard() {
   putimageonboard("0 0", "white", "rook");
   putimageonboard("0 7", "white", "rook");
-  putimageonboard("0 1", "white", "bishop");
-  putimageonboard("0 6", "white", "bishop");
-  putimageonboard("0 2", "white", "knight");
-  putimageonboard("0 5", "white", "knight");
+  putimageonboard("0 1", "white", "knight");
+  putimageonboard("0 6", "white", "knight");
+  putimageonboard("0 2", "white", "bishop");
+  putimageonboard("0 5", "white", "bishop");
   putimageonboard("0 3", "white", "king");
   putimageonboard("0 4", "white", "queen");
   putimageonboard("7 0", "dark", "rook");
   putimageonboard("7 7", "dark", "rook");
-  putimageonboard("7 1", "dark", "bishop");
-  putimageonboard("7 6", "dark", "bishop");
-  putimageonboard("7 2", "dark", "knight");
-  putimageonboard("7 5", "dark", "knight");
+  putimageonboard("7 1", "dark", "knight");
+  putimageonboard("7 6", "dark", "knight");
+  putimageonboard("7 2", "dark", "bishop");
+  putimageonboard("7 5", "dark", "bishop");
   putimageonboard("7 4", "dark", "king");
   putimageonboard("7 3", "dark", "queen");
   for (let i = 0; i < 8; i++) {
@@ -150,3 +148,4 @@ window.addEventListener('load',()=>{
   intialboard();
 } );
 //todo:credit
+
