@@ -1,17 +1,6 @@
 
 
 
-function returnbishopmoves(x,y){
-  let directions = [[x,y+1],[x,y-1],[x-1,y],[x+1,y],[x-1,y-1],[x+1,y+1],[x+1,y-1],[x-1,y+1]];
-  for (let index = 0; index < directions.length; index++) {
-    let row = directions[index][0];
-    let col = directions[index][1];
-    while (row <8 && row> -1 && elementbyid() !== "piece") {
-      
-    }
-    
-  }
-}
 
 
 
@@ -24,25 +13,39 @@ function possiblemoves(piecetype, position) {
   let y = parseInt(position[2]);
   
   
-  if (piecetype === '<img src="chess/images/dark/king.png">'||
-  piecetype === '<img src="chess/images/white/king.png">') {
-  for (let i = 0; i < directions.length; i++) {
-  elementById(directions[i][0], directions[i][1]);}}
+  // if (piecetype === '<img src="chess/images/dark/king.png">'||
+  // piecetype === '<img src="chess/images/white/king.png">') {
+  // // for (let i = 0; i < directions.length; i++) {
+  // // elementById(directions[i][0], directions[i][1]);}}
   
   
   
   
   
-  if (piecetype === '<img src="chess/images/dark/bishop.png">'||
-  piecetype === '<img src="chess/images/white/bishop.png">') {
-  returnbishopmoves(x,y)
-    for (let i = 0; i < directions.length; i+2) {
-    elementById(directions[i][0], directions[i][1]);
-    console.log(x,y)
-     x++,y++}}
+  // if (piecetype === '<img src="chess/images/dark/bishop.png">'||
+  // piecetype === '<img src="chess/images/white/bishop.png">') {
+  // returnbishopmoves(x,y)
+  //   for (let i = 0; i < directions.length; i+2) {
+  //   elementById(directions[i][0], directions[i][1]);
+  //   console.log(x,y)
+  //    x++,y++}}
   
   
-  
+     function returnmoves(x,y){
+      for (let index = 0; index < 9; index++) {
+        for (let j = 1; j < 9; j++) {
+          let directions = [[x,y+j],[x,y-j],[x-j,y],[x+j,y],[x-j,y-j],[x+j,y+j],[x+j,y-j],[x-j,y+j]];
+        let row = directions[index][0];
+        let col = directions[index][1];
+        if (row <8 && row> -1 && col<8 && col> -1) {
+          elementById(row,col)
+        }
+        }
+        
+      }
+    }
+    returnmoves(4,5)
+
   
   
   
@@ -146,5 +149,4 @@ window.addEventListener('load',()=>{
   makechessboard();
   intialboard();
 } );
-
 //todo:credit
