@@ -38,10 +38,10 @@ function intialboard() {
   putimageonboard("7 4", "dark", "king");
   putimageonboard("7 3", "dark", "queen");
   for (let i = 0; i < 8; i++) {
-  //   putimageonboard("6 " + i, "dark", "pawn");
-  // }
-  // for (let i = 0; i < 8; i++) {
-  //   putimageonboard("1 " + i, "white", "pawn");
+    putimageonboard("6 " + i, "dark", "pawn");
+  }
+  for (let i = 0; i < 8; i++) {
+    putimageonboard("1 " + i, "white", "pawn");
   }
 }
 function putimageonboard(id, color, type) {
@@ -62,7 +62,6 @@ function onclick(e) {
         document.querySelectorAll(".occupiedcell").forEach((e) => {
           e.classList.remove('occupiedcell');})
           counter ++;
-          console.log(counter) 
         return}
       document.querySelectorAll(".maybecell").forEach((e) => {
         e.classList.remove('maybecell');})
@@ -129,13 +128,22 @@ function possiblemoves(piecetype, position) {
                     }}}}
                     if (piecetype === '<img src="chess/images/dark/knight.png">' || piecetype === '<img src="chess/images/white/knight.png">'){
                       for (let index = 0; index < 8; index++) {
-                        for (let j = 0; j < 8; j++) {
+                        for (let j = 2; j < 4; j+=2) {
                           let directions = [[x-j,y-j],[x+j,y+j],[x-j,y+j],[x+j,y-j],[x,y+j],[x,y-j],[x-j,y],[x+j,y]];
                           let row = directions[index][0];
                           let col = directions[index][1];
                           if (row <8 && row> -1 && col<8 && col> -1) {
                           elementById(row,col)
                           }}}}
+                          if (piecetype === '<img src="chess/images/dark/pawn.png">' || piecetype === '<img src="chess/images/white/pawn.png">'){
+                            for (let index = 6; index < 8; index++) {
+                              for (let j = 1; j < 2; j++) {
+                                let directions = [[x-j,y-j],[x+j,y+j],[x-j,y+j],[x+j,y-j],[x,y+j],[x,y-j],[x-j,y],[x+j,y]];
+                                let row = directions[index][0];
+                                let col = directions[index][1];
+                                if (row <8 && row> -1 && col<8 && col> -1) {
+                                elementById(row,col)
+                                }}}}
 
         
                           function elementById(x, y) {
