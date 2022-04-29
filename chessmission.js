@@ -1,3 +1,6 @@
+let counter = 0; 
+let arr = [];
+let piecetype;
 function makechessboard() {
   let ChessTable = document.createElement("table");
   document.body.appendChild(ChessTable);
@@ -49,16 +52,22 @@ function putimageonboard(id, color, type) {
 }
 function onclick(e) {
   document.querySelectorAll(".chosencell").forEach((e) => {
-    e.classList.remove('chosencell');})  
-    if(e.currentTarget.classList.contains('maybecell')){
-       e.currentTarget.innerHTML = arr[arr.length-1];
+    e.classList.remove('chosencell');}) 
+    if(e.currentTarget.classList.contains('maybecell') || e.currentTarget.classList.contains('occupiedcell')){
+      e.currentTarget.innerHTML = arr[arr.length-1];
       i =  document.getElementById(arr[arr.length-2]);
       i.innerHTML = ""
-       document.querySelectorAll(".maybecell").forEach((e) => {
-        e.classList.remove('maybecell');})
-       return}
       document.querySelectorAll(".maybecell").forEach((e) => {
         e.classList.remove('maybecell');})
+        document.querySelectorAll(".occupiedcell").forEach((e) => {
+          e.classList.remove('occupiedcell');})
+          counter ++;
+          console.log(counter) 
+        return}
+      document.querySelectorAll(".maybecell").forEach((e) => {
+        e.classList.remove('maybecell');})
+        document.querySelectorAll(".occupiedcell").forEach((e) => {
+          e.classList.remove('occupiedcell');})
         
         
         // if(maybecell.classList.contains('maybecell')
@@ -68,8 +77,9 @@ function onclick(e) {
       // }
   //   return;
   
-    
-    e.currentTarget.classList.add("chosencell");
+  if(e.currentTarget.innerHTML.includes('dark') && counter%2 !==0 || e.currentTarget.innerHTML.includes('white') && (counter%2 ===0 || counter === 0)){
+    if(e.currentTarget.innerHTML !== "" && !e.currentTarget.classList.contains('chosencell')) {
+      e.currentTarget.classList.add("chosencell");}}
     let piecetype = e.currentTarget.innerHTML;
     let position = e.currentTarget.id;
     if (piecetype !== ""){
@@ -78,8 +88,6 @@ function onclick(e) {
     }
     possiblemoves(piecetype, position);
   } 
-let arr = []
-let piecetype;
 function possiblemoves(piecetype, position) {
   let x = parseInt(position[0]);
   let y = parseInt(position[2]);
@@ -132,12 +140,13 @@ function possiblemoves(piecetype, position) {
         
                           function elementById(x, y) {
                             let maybecell = document.getElementById(String(x) + " " + String(y));
-                          
+                            
+                            if(piecetype.includes('dark') && counter%2 !==0 || piecetype.includes('white') && (counter%2 ===0 || counter === 0)){
                             if(maybecell !== null && maybecell.id !== x + "" + y  && maybecell.innerHTML === ''){
                               maybecell.classList.add("maybecell")}
                               if(maybecell.innerHTML.includes('white')&& piecetype.includes('dark')|| maybecell.innerHTML.includes('dark')&& piecetype.includes('white')){
                                 maybecell.classList.add("occupiedcell")
-                              }}
+                              }}}
       
     
 
