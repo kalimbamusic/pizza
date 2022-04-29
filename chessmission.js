@@ -58,7 +58,7 @@ function elementById(x, y) {
     if(maybecell !== null && maybecell.id !== position && maybecell.innerHTML === ''){
       maybecell.classList.add("maybecell")
       if(maybecell.innerHTML !== ''){
-        maybecell.classList.add('occupiedcell')
+        maybecell.classList.add("occupiedcell")
       }
       if(maybecell.classList.contains('maybecell')){
         cells.push(maybecell)
@@ -67,23 +67,21 @@ function elementById(x, y) {
 }
 }
 function onclick(e) {
-  if(e.currentTarget.classList[2] === "chosencell"){
-    e.currentTarget.classList.remove("chosencell");
-    document.querySelectorAll(".maybecell").forEach((td) => {
-      td.classList.remove('maybecell');
-    })   
-    return;
-  }
-  if(e.currentTarget.classList[2] === "maybecell"){
-    console.log('maybecell!');
-    return;
-  }
-  if (e.currentTarget.innerHTML !== ""){
-    let i = document.querySelector(".chosencell");
-    if (i !== null) {
-      i.classList.remove("chosencell");
-    }
-  }
+  document.querySelectorAll(".chosencell").forEach((e) => {
+    e.classList.remove('chosencell');})  
+    if(e.currentTarget.classList.contains('maybecell')){
+      console.log('maybecell!'); }
+      document.querySelectorAll(".maybecell").forEach((e) => {
+        e.classList.remove('maybecell');})
+        
+        
+        // if(maybecell.classList.contains('maybecell')
+    // if(e.currentTarget.classList[2] === "chosencell"){
+      //   e.currentTarget.classList.remove("chosencell");
+      //   return;
+      // }
+  //   return;
+  
     
     e.currentTarget.classList.add("chosencell");
     let piecetype = e.currentTarget.innerHTML;
