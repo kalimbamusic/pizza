@@ -70,15 +70,21 @@ function onclick(e) {
   document.querySelectorAll(".chosencell").forEach((e) => {
     e.classList.remove('chosencell');})  
     if(e.currentTarget.classList.contains('maybecell')){
-      console.log('maybecell!'); }
+       e.currentTarget.innerHTML = arr[arr.length-1];
+      i =  document.getElementById(arr[arr.length-2]);
+      i.innerHTML = ""
+       
+       document.querySelectorAll(".maybecell").forEach((e) => {
+        e.classList.remove('maybecell');})
+       return}
       document.querySelectorAll(".maybecell").forEach((e) => {
         e.classList.remove('maybecell');})
         
         
         // if(maybecell.classList.contains('maybecell')
-    // if(e.currentTarget.classList[2] === "chosencell"){
-      //   e.currentTarget.classList.remove("chosencell");
-      //   return;
+        // if(e.currentTarget.classList.contains('chosencell')){
+        //   e.currentTarget.classList.remove("chosencell");
+        // return;}
       // }
   //   return;
   
@@ -86,9 +92,13 @@ function onclick(e) {
     e.currentTarget.classList.add("chosencell");
     let piecetype = e.currentTarget.innerHTML;
     let position = e.currentTarget.id;
+    if (piecetype !== ""){
+      arr.push(position)
+      arr.push(piecetype)
+    }
     possiblemoves(piecetype, position);
-  
-}
+  }
+  let arr = []
 
 function makechessboard() {
   let ChessTable = document.createElement("table");
