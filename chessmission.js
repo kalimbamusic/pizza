@@ -60,6 +60,7 @@ function onclick(e) {
     e.currentTarget.classList.contains("maybecell") ||
     e.currentTarget.classList.contains("occupiedcell")
   ) {
+    //take info from last cell that was clicked, and clear last cell
     e.currentTarget.innerHTML = lasttdinfo[lasttdinfo.length - 1];
     i = document.getElementById(lasttdinfo[lasttdinfo.length - 2]);
     i.innerHTML = "";
@@ -78,6 +79,7 @@ function onclick(e) {
   document.querySelectorAll(".occupiedcell").forEach((e) => {
     e.classList.remove("occupiedcell");
   });
+  //only color cell if it's the right turn for the specific color(doesn't need to be higher in the function cause other colors can't be generated before clicked cell color was initiated)
   if (
     (e.currentTarget.innerHTML.includes("dark") && counter % 2 !== 0) ||
     (e.currentTarget.innerHTML.includes("white") &&
@@ -90,6 +92,7 @@ function onclick(e) {
       e.currentTarget.classList.add("chosencell");
     }
   }
+  //keep cell && piece info, for next click or for sending it to function possiblemoves
   let piecetype = e.currentTarget.innerHTML;
   let position = e.currentTarget.id;
   if (piecetype !== "") {
@@ -99,12 +102,14 @@ function onclick(e) {
   possiblemoves(piecetype, position);
 }
 function possiblemoves(piecetype, position) {
+  //get cells id, change to numbers so you can caculate relative cells
   let x = parseInt(position[0]);
   let y = parseInt(position[2]);
   if (
     piecetype === '<img src="chess/images/dark/queen.png">' ||
     piecetype === '<img src="chess/images/white/queen.png">'
   ) {
+    //iterate over 8 possible directions, while (trying to) adjust to specific piece
     for (let index = 0; index < 8; index++) {
       for (let j = 1; j < 8; j++) {
         let directions = [
@@ -119,6 +124,7 @@ function possiblemoves(piecetype, position) {
         ];
         let row = directions[index][0];
         let col = directions[index][1];
+        //make sure found piece is not out of bounds
         if (row < 8 && row > -1 && col < 8 && col > -1) {
           elementById(row, col);
         }
@@ -243,7 +249,7 @@ function possiblemoves(piecetype, position) {
           elementById(row, col);
         }
       }
-    }
+    } //todo: if specific directions array found an occupied cell, delete that array, countine iterating on the others.
   }
 
   function elementById(x, y) {
@@ -273,4 +279,3 @@ window.addEventListener("load", () => {
   makechessboard();
   intialboard();
 });
-//todo:credit
